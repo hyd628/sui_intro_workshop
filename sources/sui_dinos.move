@@ -128,6 +128,17 @@ module sui_intro_workshop::dino_nft {
         nft.description = string::utf8(new_description)
     }
 
+    /// Update the `description` of `nft` to `new_description`
+    public entry fun update_child_nft(
+        child_nft: &mut EggNFT,
+        _parent_nft: &mut DinoNFT,
+        _: &mut TxContext
+    ) {
+        child_nft.name = string::utf8(b"Baby Dino NFT");
+        child_nft.description = string::utf8(b"Hatched Dino NFT");
+        child_nft.url = url::new_unsafe_from_bytes(b"https://i5.walmartimages.com/asr/f9653453-7d31-45bc-af26-51a027f16d23_1.76b701b2bf1fddb47a3f823807c1999f.jpeg")
+    }
+
     /// Permanently delete `nft`
     public entry fun burn(nft: DinoNFT, _: &mut TxContext) {
         let DinoNFT { id, name: _, description: _, url: _, dino_egg: _} = nft;
