@@ -48,7 +48,7 @@ module sui_intro_workshop::dino_nft {
     }
 
     /// Create a new devnet_nft
-    public entry fun mint(
+    public entry fun mint_dino(
         name: vector<u8>,
         description: vector<u8>,
         url: vector<u8>,
@@ -68,6 +68,55 @@ module sui_intro_workshop::dino_nft {
             name: nft.name,
         });
         transfer::transfer(nft, sender);
+    }
+
+    public entry fun mint_egg(
+        name: vector<u8>,
+        description: vector<u8>,
+        url: vector<u8>,
+        ctx: &mut TxContext
+    ) {
+        let nft = EggNFT {
+            id: object::new(ctx),
+            name: string::utf8(name),
+            description: string::utf8(description),
+            url: url::new_unsafe_from_bytes(url)
+        };
+        let sender = tx_context::sender(ctx);
+        event::emit(MintNFTEvent {
+            object_id: object::uid_to_inner(&nft.id),
+            creator: sender,
+            name: nft.name,
+        });
+        transfer::transfer(nft, sender);
+    }
+
+    public entry fun add_egg(dino: &mut DinoNFT, egg: EggNFT) {
+        option::fill(&mut dino.dino_egg, object::id(&egg));
+        transfer::transfer_to_object(egg, dino);
+    }
+
+    public entry fun mint_and_give_egg(
+        name: vector<u8>,
+        description: vector<u8>,
+        url: vector<u8>,
+        dino: &mut DinoNFT,
+        ctx: &mut TxContext
+    ) {
+        let nft = EggNFT {
+            id: object::new(ctx),
+            name: string::utf8(name),
+            description: string::utf8(description),
+            url: url::new_unsafe_from_bytes(url)
+        };
+        let sender = tx_context::sender(ctx);
+        event::emit(MintNFTEvent {
+            object_id: object::uid_to_inner(&nft.id),
+            creator: sender,
+            name: nft.name,
+        });
+        option::fill(&mut dino.dino_egg, object::id(&nft));
+        transfer::transfer_to_object(nft, dino);
     }
 
     /// Update the `description` of `nft` to `new_description`
@@ -115,7 +164,7 @@ module sui_intro_workshop::devnet_nftTests {
         // create the NFT
         let scenario = test_scenario::begin(&addr1);
         {
-            dino_nft::mint(b"test", b"a test", b"https://www.sui.io", test_scenario::ctx(&mut scenario))
+            dino_nft::mint_dino(b"test", b"a test", b"https://www.sui.io", test_scenario::ctx(&mut scenario))
         };
         // send it from A to B
         test_scenario::next_tx(&mut scenario, &addr1);
