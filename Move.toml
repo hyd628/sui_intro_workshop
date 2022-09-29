@@ -1,0 +1,10 @@
+[package]
+name = "sui_intro_workshop"
+version = "0.0.1"
+
+[dependencies]
+Sui = { local = "../sui/crates/sui-framework" }
+
+[addresses]
+sui_intro_workshop =  "0x0"
+sui = "0x2"
