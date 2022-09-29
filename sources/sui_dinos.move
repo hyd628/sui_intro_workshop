@@ -81,7 +81,7 @@ module sui_intro_workshop::dino_nft {
 
     /// Permanently delete `nft`
     public entry fun burn(nft: DinoNFT, _: &mut TxContext) {
-        let DinoNFT { id, name: _, description: _, url: _ } = nft;
+        let DinoNFT { id, name: _, description: _, url: _, dino_egg: _} = nft;
         object::delete(id)
     }
 
