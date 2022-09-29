@@ -143,7 +143,7 @@ module sui_intro_workshop::dino_nft {
 }
 
 #[test_only]
-module sui_intro_workshop::devnet_nftTests {
+module sui_intro_workshop::dino_nftTests {
     use sui_intro_workshop::dino_nft::{Self, DinoNFT};
     use sui::test_scenario;
     use sui::transfer;
