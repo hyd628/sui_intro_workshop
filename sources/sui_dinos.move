@@ -38,20 +38,20 @@ module sui_intro_workshop::dino_nft {
         name: string::String,
     }
 
-    /// Create a new DinoNFT
-    public entry fun mint(
+    /// Private function that creates and returns a new DinoNFT
+    fun mint(
         name: vector<u8>,
         description: vector<u8>,
         url: vector<u8>,
         ctx: &mut TxContext
-    ) {
+    ): DinoNFT {
         let nft = DinoNFT {
             id: object::new(ctx),
             name: string::utf8(name),
             description: string::utf8(description),
             url: url::new_unsafe_from_bytes(url),
             // Set the dino_egg field to None
-            dino_egg: option::none(),
+            dino_egg: option::none()
         };
         let sender = tx_context::sender(ctx);
         event::emit(MintNFTEvent {
@@ -59,30 +59,29 @@ module sui_intro_workshop::dino_nft {
             creator: sender,
             name: nft.name,
         });
-        transfer::transfer(nft, sender);
+        nft
     }
 
-    /// Mint a DinoNFT and set it as a child (egg) to a parent DinoNFT
-    public entry fun mint_and_give_egg(
+    /// Mint a DinoNFT to an account 
+    public entry fun mint_to_account(
+        name: vector<u8>,
+        description: vector<u8>,
+        url: vector<u8>,
+        ctx: &mut TxContext
+    ) {
+        let nft = mint(name, description, url, ctx);
+        transfer::transfer(nft, tx_context::sender(ctx));
+    }
+
+    /// Mint a DinoNFT and set it as a child to a parent object
+    public entry fun mint_to_object(
         name: vector<u8>,
         description: vector<u8>,
         url: vector<u8>,
         dino_parent: &mut DinoNFT,
         ctx: &mut TxContext
     ) {
-        let nft = DinoNFT {
-            id: object::new(ctx),
-            name: string::utf8(name),
-            description: string::utf8(description),
-            url: url::new_unsafe_from_bytes(url),
-            dino_egg: option::none(),
-        };
-        let sender = tx_context::sender(ctx);
-        event::emit(MintNFTEvent {
-            object_id: object::uid_to_inner(&nft.id),
-            creator: sender,
-            name: nft.name,
-        });
+        let nft = mint(name, description, url, ctx);
         option::fill(&mut dino_parent.dino_egg, object::id(&nft));
         transfer::transfer_to_object(nft, dino_parent);
     }
@@ -111,7 +110,7 @@ module sui_intro_workshop::dino_nft {
     }
 
     /// Retrieve the child NFT and send it to the message sender
-    public entry fun retrieve_hatched_dino(
+    public entry fun retrieve_child_dino(
         child_nft: DinoNFT,
         parent_nft: &mut DinoNFT,
         ctx: &mut TxContext
@@ -156,7 +155,7 @@ module sui_intro_workshop::dino_nftTests {
         // create the NFT
         let scenario = test_scenario::begin(&addr1);
         {
-            dino_nft::mint(b"test", b"a test", b"https://www.sui.io", test_scenario::ctx(&mut scenario))
+            dino_nft::mint_to_account(b"test", b"a test", b"https://www.sui.io", test_scenario::ctx(&mut scenario))
         };
         // send it from A to B
         test_scenario::next_tx(&mut scenario, &addr1);
