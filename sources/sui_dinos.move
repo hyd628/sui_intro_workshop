@@ -160,12 +160,14 @@ module sui_intro_workshop::dino_nft {
     public fun url(nft: &DinoNFT): &Url {
         &nft.url
     }
+
+    #[test_only] public fun init_for_testing(ctx: &mut TxContext) { init(ctx) }
 }
 
 #[test_only]
 module sui_intro_workshop::dino_nftTests {
     use sui_intro_workshop::dino_nft::{Self, DinoNFT, MinterCap};
-    use sui::test_scenario;
+    use sui::test_scenario::{Self, next_tx, ctx};
     use sui::transfer;
     use std::string;
 
@@ -175,6 +177,12 @@ module sui_intro_workshop::dino_nftTests {
         let addr2 = @0xB;
         // create the NFT
         let scenario = test_scenario::begin(&addr1);
+        
+        next_tx(&mut scenario, &addr1); 
+        {
+            dino_nft::init_for_testing(ctx(&mut scenario))
+        };
+        next_tx(&mut scenario, &addr1);
         {
             let mintercap = test_scenario::take_owned<MinterCap>(&mut scenario);
             dino_nft::mint_to_account(&mintercap, b"test", b"a test", b"https://www.sui.io", test_scenario::ctx(&mut scenario));
