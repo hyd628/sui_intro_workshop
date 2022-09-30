@@ -140,6 +140,12 @@ module sui_intro_workshop::dino_nft {
         object::delete(id)
     }
 
+    /// Permanently delete `minterCap`
+    public entry fun burn_cap(cap: MinterCap, _: &mut TxContext) {
+        let MinterCap { id } = cap;
+        object::delete(id)
+    }
+
     /// Get the NFT's `name`
     public fun name(nft: &DinoNFT): &string::String {
         &nft.name
@@ -156,45 +162,43 @@ module sui_intro_workshop::dino_nft {
     }
 }
 
-// #[test_only]
-// module sui_intro_workshop::dino_nftTests {
-//    use sui_intro_workshop::dino_nft::{Self, DinoNFT, MinterCap};
-//    use sui::test_scenario;
-//    use sui::transfer;
-//    use std::string;
-//    use sui::object::{Self};
+#[test_only]
+module sui_intro_workshop::dino_nftTests {
+    use sui_intro_workshop::dino_nft::{Self, DinoNFT, MinterCap};
+    use sui::test_scenario;
+    use sui::transfer;
+    use std::string;
 
-//    #[test]
-//    fun mint_transfer_update() {
-//        let addr1 = @0xA;
-//        let addr2 = @0xB;
-//        // create the NFT
-//        let scenario = test_scenario::begin(&addr1);
-//        {
-//            let mintercap = test_scenario::take_owned<MinterCap>(&mut scenario);
-//            dino_nft::mint_to_account(&mintercap, b"test", b"a test", b"https://www.sui.io", test_scenario::ctx(&mut scenario))
-//        };
+    #[test]
+    fun mint_transfer_update() {
+        let addr1 = @0xA;
+        let addr2 = @0xB;
+        // create the NFT
+        let scenario = test_scenario::begin(&addr1);
+        {
+            let mintercap = test_scenario::take_owned<MinterCap>(&mut scenario);
+            dino_nft::mint_to_account(&mintercap, b"test", b"a test", b"https://www.sui.io", test_scenario::ctx(&mut scenario));
+            dino_nft::burn_cap(mintercap, test_scenario::ctx(&mut scenario))
+        };
         // send it from A to B
-//        test_scenario::next_tx(&mut scenario, &addr1);
-//        {
-//            let nft = test_scenario::take_owned<DinoNFT>(&mut scenario);
-//            transfer::transfer(nft, addr2);
-//        };
+        test_scenario::next_tx(&mut scenario, &addr1);
+        {
+            let nft = test_scenario::take_owned<DinoNFT>(&mut scenario);
+            transfer::transfer(nft, addr2);
+        };
         // update its description
-//        test_scenario::next_tx(&mut scenario, &addr2);
-//        {
-//            let nft = test_scenario::take_owned<DinoNFT>(&mut scenario);
-//            dino_nft::update_description(&mut nft, b"a new description", test_scenario::ctx(&mut scenario)) ;
-//            assert!(*string::bytes(dino_nft::description(&nft)) == b"a new description", 0);
-//            test_scenario::return_owned(&mut scenario, nft);
-//        };
+        test_scenario::next_tx(&mut scenario, &addr2);
+        {
+            let nft = test_scenario::take_owned<DinoNFT>(&mut scenario);
+            dino_nft::update_description(&mut nft, b"a new description", test_scenario::ctx(&mut scenario)) ;
+            assert!(*string::bytes(dino_nft::description(&nft)) == b"a new description", 0);
+            test_scenario::return_owned(&mut scenario, nft);
+        };
         // burn it
-//        test_scenario::next_tx(&mut scenario, &addr2);
-//        {
-//            let nft = test_scenario::take_owned<DinoNFT>(&mut scenario);
-//            let mintercap = test_scenario::take_owned<MinterCap>(&mut scenario);
-//            dino_nft::burn(nft, test_scenario::ctx(&mut scenario));
-//            object::delete(mintercap.ID)
-//        }
-//    }
-//}
+        test_scenario::next_tx(&mut scenario, &addr2);
+        {
+            let nft = test_scenario::take_owned<DinoNFT>(&mut scenario);
+            dino_nft::burn(nft, test_scenario::ctx(&mut scenario));
+        }
+    }
+}
