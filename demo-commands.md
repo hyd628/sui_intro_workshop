@@ -32,4 +32,8 @@ sui client call --function owner_mint_to_account --module dino_nft --package 0x0
 
 (paid mint)
 
-sui client call --function mint_to_account --module dino_nft --package 0x063fc7eafe8dea7a4a984bc8ff476c344f0b2f59 --args 0x5fb8df0dc2240bc240f5ff5e5cacfa9814346551 "Sui Dino NFT" "A Dino NFT minted on Sui" "https://www.ikea.com/sg/en/images/products/jaettelik-soft-toy-dinosaur-dinosaur-stegosaurus__0804790_pe769331_s5.jpg" 0x24373743391cb23c98db05a8121b576db30f5277 --gas-budget 1000
+sui client call --function mint_to_account --module dino_nft --package 0x8faafda44b58a56d5f3cf22bbcbee60d308baa94 --args 0xd80764d8663056354861d5274c73b8df77892aa1 "Sui Dino NFT" "A Dino NFT minted on Sui" "https://www.ikea.com/sg/en/images/products/jaettelik-soft-toy-dinosaur-dinosaur-stegosaurus__0804790_pe769331_s5.jpg" 0x33a34d986f6fa38e76304fbeee1ac36da4734299 --gas-budget 1000
+
+(withdrawal)
+
+sui client call --function owner_withdraw --module dino_nft --package 0xce92852eee84d0fb483878dfcea051ad6b9b39af --args 0x1026b22b00ae47553e8206258d29cda47a2b0f80 0x64bf57b21b50215c34297fce647669f5aae3a012  --gas-budget 1000

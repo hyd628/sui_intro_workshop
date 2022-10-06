@@ -33,7 +33,12 @@ Familiarize yourself with the sui_dinos.move contract. You will use that as the 
 
 Create a new method in the `sui_intro_workshop::dino_nft` module for the owner of the NFT contract to withdraw the balance collected in `MintingTreasury` to their own account.
 
-Hint: the contract already has most of the infrastructure needed to do this. What are we using to mark the owner or minter account of the NFT contract?
+Hints: 
+
+- The contract already has most of the infrastructure needed to do this. What are we using to mark the owner or minter account of the NFT contract?
+- Tou may need to use functions from [the coin module](https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/coin.md) and [the balance module]
+(https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/balance.md
+)
 
 ### Challenge Two
 
