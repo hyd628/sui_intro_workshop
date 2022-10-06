@@ -55,7 +55,7 @@ module sui_intro_workshop::dino_nft {
     }
 
     /// Module initializer is called once on module publish.
-    /// Here we create only one instance of `MinterCap` and send it to the deployer account.
+    /// Here we create only one instance of `MinterCap` and `MintingTreausury` and send it to the deployer account.
     fun init(ctx: &mut TxContext) {
 
         transfer::transfer(MinterCap {
@@ -65,7 +65,7 @@ module sui_intro_workshop::dino_nft {
         transfer::share_object(MintingTreasury {
             id: object::new(ctx),
             balance: balance::zero<SUI>(),
-            mintingfee: 10000
+            mintingfee: 5000000
         })
     }
 
