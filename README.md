@@ -25,31 +25,34 @@ Intro to Sui Object Workshop Repo
 
 ## Breakout Session Instructions
 
-Set up the environment and git clone this repo per the instructions in this README. 
+Set up the environment, git clone this repo, and acquire some DevNet Sui tokens per the instructions in this README. 
 
 Familiarize yourself with the sui_dinos.move contract. You will use that as the starting point for the following two tasks. 
 
-### Challenge One
+### Challenge One: Working with Sui Coin Objects
+
+Currently, we are aborting the transaction if the coin object sent in during paid minting is not the exact same amount as the minting fee. 
+
+Make the changes necessary so that we check if the coin object sent in is enough to cover the minting fee and send back any extra left as change, instead of only accepting the exact amount. 
+
+Hint: 
+- You will need to utilize functions in [the Sui Coin module](https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/coin.md).
+- It might be useful to redefine the existing error type for not sending in the exact amount. 
+
+### Challenge Two: Access Based Withdrawal
 
 Create a new method in the `sui_intro_workshop::dino_nft` module for the owner of the NFT contract to withdraw the balance collected in `MintingTreasury` to their own account.
 
 Hints: 
 
 - The contract already has most of the infrastructure needed to do this. What are we using to mark the owner or minter account of the NFT contract?
-- Tou may need to use functions from [the coin module](https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/coin.md) and [the balance module]
-(https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/balance.md
-)
-
-### Challenge Two
-
-Currently, each dino NFT object can only have one child NFT object (try to mint a new dino NFT object to a dino NFT that already has a child  and see what error you get). 
-
-Make the changes necessary to the dino_nft module to allow each parent Dino NFT to own many child NFTs. 
-
-Hint: You will need to utilize the [vector data structure](https://move-book.com/advanced-topics/managing-collections-with-vectors.html).
+- You will need to use functions from [the Sui Coin module](https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/coin.md) and [the Sui Balance module]
+(https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/balance.md).
+- It might make sense to create a new error type for an edge case here.
 
 ### Resources
 
+[Sui Framework Docs](https://github.com/MystenLabs/sui/tree/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs)
 [Sui Developer Documentation](https://docs.sui.io/)
 [Move Programming Language Book](https://move-book.com/index.html)
 [Sui by Example](https://examples.sui.io/index.html)
@@ -58,6 +61,7 @@ Hint: You will need to utilize the [vector data structure](https://move-book.com
 
 When you are ready to see the solutions:
 
-- Here is the solution to challenge one
-- Here is the solution to challenge two
+- [Solution to challenge one](https://github.com/hyd628/sui_intro_workshop/blob/main/breakout_session_solutions/challenge_1_solution.move)
+- [Solution to challenge two](https://github.com/hyd628/sui_intro_workshop/blob/main/breakout_session_solutions/challenge_2_solution.move)
+- [Combined solution to both challenges](https://github.com/hyd628/sui_intro_workshop/blob/main/breakout_session_solutions/combined_solution.move)
 
