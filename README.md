@@ -25,6 +25,8 @@ Intro to Sui Object Workshop Repo
 
 ## Breakout Session Instructions
 
+Set up the environment and git clone this repo per the instructions in this README. 
+
 Familiarize yourself with the sui_dinos.move contract. You will use that as the starting point for the following two tasks. 
 
 ### Challenge One
@@ -36,11 +38,18 @@ Hint: the contract already has most of the infrastructure needed to do this. Wha
 ### Challenge Two
 
 Currently, each dino NFT object can only have one child NFT object (try to mint a new dino NFT object to a dino NFT that already has a child  and see what error you get). 
+
 Make the changes necessary to the dino_nft module to allow each parent Dino NFT to own many child NFTs. 
 
 Hint: You will need to utilize the [vector data structure](https://move-book.com/advanced-topics/managing-collections-with-vectors.html).
 
-### Check Solution
+### Resources
+
+[Sui Developer Documentation](https://docs.sui.io/)
+[Move Programming Language Book](https://move-book.com/index.html)
+[Sui by Example](https://examples.sui.io/index.html)
+
+### Check Solutions
 
 When you are ready to see the solutions:
 
