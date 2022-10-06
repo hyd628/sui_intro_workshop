@@ -29,13 +29,15 @@ Set up the environment, git clone this repo, and acquire some DevNet Sui tokens 
 
 Familiarize yourself with the sui_dinos.move contract. You will use that as the starting point for the following two tasks. 
 
+The two challenges are independent. You can work on either one, but doing the first one will give you some familiarity with the `sui::coin` module, which is also used in challenge two. 
+
 ### Challenge One: Working with Sui Coin Objects
 
 Currently, we are aborting the transaction if the coin object sent in during paid minting is not the exact same amount as the minting fee. 
 
 Make the changes necessary so that we check if the coin object sent in is enough to cover the minting fee and send back any extra left as change, instead of only accepting the exact amount. 
 
-Hint: 
+Hints: 
 - You will need to utilize functions in [the sui::coin module](https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/coin.md).
 - It might be useful to redefine the existing error type for not sending in the exact amount. 
 
