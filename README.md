@@ -36,7 +36,7 @@ Currently, we are aborting the transaction if the coin object sent in during pai
 Make the changes necessary so that we check if the coin object sent in is enough to cover the minting fee and send back any extra left as change, instead of only accepting the exact amount. 
 
 Hint: 
-- You will need to utilize functions in [the Sui Coin module](https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/coin.md).
+- You will need to utilize functions in [the sui::coin module](https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/coin.md).
 - It might be useful to redefine the existing error type for not sending in the exact amount. 
 
 ### Challenge Two: Access Based Withdrawal
@@ -46,8 +46,7 @@ Create a new method in the `sui_intro_workshop::dino_nft` module for the owner o
 Hints: 
 
 - The contract already has most of the infrastructure needed to do this. What are we using to mark the owner or minter account of the NFT contract?
-- You will need to use functions from [the Sui Coin module](https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/coin.md) and [the Sui Balance module]
-(https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/balance.md).
+- You will need to use functions from [the sui::coin module](https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/coin.md) and [the sui::balance module](https://github.com/MystenLabs/sui/blob/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs/balance.md).
 - It might make sense to create a new error type for an edge case here.
 
 ### Resources
