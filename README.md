@@ -1,6 +1,6 @@
 # sui_intro_workshop
 
-Intro to Sui Object Workshop Repo
+Intro to Sui Objects Workshop Repo
 
 ## Installing Sui Binaries
 
