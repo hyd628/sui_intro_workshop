@@ -55,6 +55,8 @@ Create a new method in the `sui_intro_workshop::dino_nft` module for the owner o
 
 - [Sui Framework Docs](https://github.com/MystenLabs/sui/tree/fe1db4b50425c28693a34564bd8b54be8a68ad89/crates/sui-framework/docs)
 - [Sui Developer Documentation](https://docs.sui.io/)
+- [Sui Explorer](https://explorer.devnet.sui.io/)
+- [Sui CLI Tutorial](https://docs.sui.io/build/cli-client)
 - [Move Programming Language Book](https://move-book.com/index.html)
 - [Sui by Example](https://examples.sui.io/index.html)
 
