@@ -7,7 +7,7 @@ Intro to Sui Objects Workshop Repo
 - Install Rust and other dependencies: https://docs.sui.io/build/install#prerequisites
 - git clone https://github.com/MystenLabs/sui.git --branch devnet
 - git fetch upstream
-- git checkout devnet-0.10.0
+- git checkout devnet-0.12.2
 - cargo install --locked --git https://github.com/MystenLabs/sui.git --branch "devnet" sui sui-gateway
 - sui client (use default options to connect to devnet)
 
