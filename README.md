@@ -4,12 +4,17 @@ Intro to Sui Objects Workshop Repo
 
 ## Installing Sui Binaries
 
-- Install Rust and other dependencies: https://docs.sui.io/build/install#prerequisites
-- git clone https://github.com/MystenLabs/sui.git --branch devnet
-- git fetch upstream
-- git checkout devnet-0.12.2
-- cargo install --locked --git https://github.com/MystenLabs/sui.git --branch "devnet" sui sui-gateway
-- sui client (use default options to connect to devnet)
+Install Rust and other dependencies: https://docs.sui.io/build/install#prerequisites
+
+`git clone https://github.com/MystenLabs/sui.git --branch devnet`
+
+`git fetch upstream`
+
+`git checkout devnet-0.12.2`
+
+`cargo install --locked --git https://github.com/MystenLabs/sui.git --branch "devnet" sui sui-gateway`
+
+`sui client (use default options to connect to devnet)`
 
 ## Acquire Devnet Sui Tokens
 
@@ -19,9 +24,11 @@ Intro to Sui Objects Workshop Repo
 
 ## Build and Publish the Module
 
-- git clone https://github.com/hyd628/sui_intro_workshop.git
-- sui move build
-- sui client publish --path [local file path to the sui intro workshop module] --gas-budget 30000
+`git clone https://github.com/hyd628/sui_intro_workshop.git`
+
+`sui move build`
+
+`sui client publish --path [local file path to the sui intro workshop module] --gas-budget 30000`
 
 ## Breakout Session Instructions
 
